@@ -1,30 +1,34 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'react-redux'
-import t from 'prop-types'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+// import t from 'prop-types'
 
 import { loadUser } from '~/actions/testAction'
 
-class Teste extends PureComponent {
-  componentDidMount () {
-    this.props.loadUser()
-  }
+const Teste = () => {
+  const teste = useSelector(state => state.test.data)
+  const dispatch = useDispatch()
 
-  render () {
-    return (
-      <h1>Olá {this.props.teste}</h1>
-    )
-  }
+  useEffect(() => {
+    console.log('DISPAROU')
+    dispatch(loadUser())
+  }, [dispatch])
+
+  return (
+    <h1>Olá {teste}</h1>
+  )
 }
 
-Teste.propTypes = {
-  loadUser: t.func.isRequired,
-  teste: t.string.isRequired
-}
+export default Teste
 
-const mapStateToProps = state => {
-  return {
-    teste: state.test.data
-  }
-}
+// Teste.propTypes = {
+//   loadUser: t.func.isRequired,
+//   teste: t.string.isRequired
+// }
 
-export default connect(mapStateToProps, { loadUser })(Teste)
+// const mapStateToProps = state => {
+//   return {
+//     teste: state.test.data
+//   }
+// }
+
+// export default connect(mapStateToProps, { loadUser })(Teste)
