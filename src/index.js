@@ -1,12 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from 'react'
+import ReactDOM from 'react-dom'
+// import jwtDecode from 'jwt-decode'
+import { Provider } from 'react-redux'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// import requestAuth from '~/utils/requestAuth'
+import App from '~/App'
+import ErrorPrevent from '~/ErrorPrevent'
+// import { setCurrentUser } from '~/actions/authAction'
+import store from '~/store'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// if (window.localStorage.jwtToken) {
+//   const token = window.localStorage.jwtToken
+//   requestAuth(token)
+//   store.dispatch(setCurrentUser(jwtDecode(token)))
+// }
+
+ReactDOM.render(
+  <ErrorPrevent>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </ErrorPrevent>,
+  document.getElementById('root')
+)
